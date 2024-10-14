@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterStatsHandler : MonoBehaviour
 {
     [SerializeField] private CharacterStat baseStat;
+    PlayerDataManger playerDataManger;
+    public Text playerName;
 
     public CharacterStat CurrentStat { get; private set; }
 
@@ -12,11 +15,13 @@ public class CharacterStatsHandler : MonoBehaviour
 
     private void Awake()
     {
+        playerDataManger = GameObject.Find("PlayerDataManger").GetComponent<PlayerDataManger>();
         UpdateCharacterStat();
     }
 
     private void UpdateCharacterStat()
     {
+        playerName.text = playerDataManger.GetName();
         AttackSo attackSo = null;
         if(baseStat.attackSo != null)
         {
